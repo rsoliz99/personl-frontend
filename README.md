@@ -1,2 +1,3 @@
-# personl-frontend
-Frontend UI for the PersonL SaaS platform
+# PersonL Frontend
+
+This is the frontend code for PersonL.
