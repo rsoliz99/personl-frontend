@@ -1,0 +1,78 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+const mockDistricts = [
+  { name: "Lamesa ISD", state: "TX" },
+  { name: "Plains ISD", state: "TX" },
+  { name: "Roswell ISD", state: "NM" },
+  { name: "Seminole ISD", state: "TX" },
+  { name: "Las Cruces ISD", state: "NM" },
+];
+
+export default function EducatorRequestSubmittedPage() {
+  const navigate = useNavigate();
+  const [request, setRequest] = useState(null);
+
+  useEffect(() => {
+    const latest = localStorage.getItem("latestRequest");
+    if (latest) {
+      setRequest(JSON.parse(latest));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("educatorUser");
+    navigate("/educator/login");
+  };
+
+  return (
+    <main className="min-h-screen bg-white p-6">
+      <div className="flex items-center justify-between mb-6">
+        <img
+          src="/personl-logo.png"
+          alt="PersonL Logo"
+          className="h-10 cursor-pointer"
+          onClick={() => navigate("/")}
+        />
+        <button
+          onClick={handleLogout}
+          className="text-sm text-[#003594] font-semibold border border-[#003594] px-3 py-1 rounded hover:bg-[#003594] hover:text-white"
+        >
+          Logout
+        </button>
+      </div>
+
+      <h1 className="text-3xl font-bold text-[#003594] mb-6 text-center">Request Submitted</h1>
+
+      {request ? (
+        <section className="bg-white border p-6 rounded max-w-2xl mx-auto space-y-4">
+          <p className="text-lg">
+            <strong>{request.from}</strong>, your file transfer request to
+            <strong> {request.to}</strong> ({request.state}) has been submitted.
+          </p>
+          <p>Status: <strong>{request.status}</strong></p>
+          <p>Certificate: {request.certificate}</p>
+          <p>Submitted: {request.requestedAt}</p>
+          {request.message && <p>Message: {request.message}</p>}
+
+          <div className="flex justify-between mt-6">
+            <button
+              onClick={() => navigate("/educator/dashboard")}
+              className="bg-[#003594] text-white px-4 py-2 rounded hover:bg-blue-800"
+            >
+              Return to Dashboard
+            </button>
+            <button
+              onClick={() => navigate("/educator/request")}
+              className="border border-[#003594] text-[#003594] px-4 py-2 rounded hover:bg-gray-100"
+            >
+              Submit Another Request
+            </button>
+          </div>
+        </section>
+      ) : (
+        <p className="text-center">No recent request found.</p>
+      )}
+    </main>
+  );
+}
