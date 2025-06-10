@@ -1,4 +1,4 @@
-// EducatorSignupPage.jsx – with SandboxBanner
+// EducatorSignupPage.jsx – Sandbox Demo Mode with Pre-Fill and Single Password Fields
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -49,8 +49,8 @@ export default function EducatorSignupPage() {
       return;
     }
 
-    const newDistrictUser = { name, email, password, district, state };
-    localStorage.setItem("educatorUser", JSON.stringify(newDistrictUser));
+    const newEducatorUser = { name, email, password, district, state };
+    localStorage.setItem("educatorUser", JSON.stringify(newEducatorUser));
     navigate("/educator/login");
   };
 
@@ -77,8 +77,23 @@ export default function EducatorSignupPage() {
       </header>
       <div className="flex justify-center">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md text-center">
-	<h1 className="text-3xl font-bold mb-6">Educator Signup</h1>
+          <h1 className="text-3xl font-bold mb-6">Educator Sign Up</h1>
           <form className="space-y-4" onSubmit={handleSubmit}>
+            <button
+              type="button"
+              onClick={() => {
+                setName("Demo Teacher");
+                setEmail("demo@demo.com");
+                setPassword("password123");
+                setConfirmPassword("password123");
+                setState("TX");
+                setDistrict("Seminole ISD");
+              }}
+              className="w-full bg-gray-200 text-sm text-[#003594] py-1 rounded hover:bg-gray-300"
+            >
+              Fill With Demo Credentials
+            </button>
+
             <input
               type="text"
               placeholder="Full Name"
