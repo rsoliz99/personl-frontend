@@ -1,10 +1,10 @@
-// DistrictSignupPage.jsx – Includes confirm password + sandbox banner toggle
+// DistrictSignupPage.jsx – with confirm password and reliable sandbox banner logic
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SandboxBanner from "../components/SandboxBanner";
 
-const isSandbox = window.location.hostname !== "getpersonl.com";
+const isSandbox = !window.location.hostname.includes("getpersonl.com");
 
 export default function DistrictSignupPage() {
   const navigate = useNavigate();
