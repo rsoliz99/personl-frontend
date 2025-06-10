@@ -77,7 +77,7 @@ export default function EducatorSignupPage() {
       </header>
       <div className="flex justify-center">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md text-center">
-          <h1 className=\"text-3xl font-bold mb-6\">Educator Signup</h1>
+	<h1 className="text-3xl font-bold mb-6">Educator Signup</h1>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
               type="text"
