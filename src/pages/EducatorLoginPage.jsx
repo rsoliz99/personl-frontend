@@ -1,4 +1,4 @@
-// EducatorLoginPage.jsx – Updated to check localStorage for sandbox login
+// EducatorLoginPage.jsx – Now supports login with localStorage credentials
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -9,11 +9,6 @@ export default function EducatorLoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const checkLocalStorageCredentials = (email, password) => {
-    const stored = JSON.parse(localStorage.getItem("educatorUser"));
-    return stored && stored.email === email && stored.password === password;
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +22,13 @@ export default function EducatorLoginPage() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      if (checkLocalStorageCredentials(email, password)) {
+      const storedUser = JSON.parse(localStorage.getItem("educatorUser"));
+
+      if (
+        storedUser &&
+        storedUser.email === email &&
+        storedUser.password === password
+      ) {
         navigate("/educator/dashboard");
       } else {
         setError("Invalid credentials. Please try again.");
@@ -76,7 +77,7 @@ export default function EducatorLoginPage() {
           </div>
           <div className="mt-2 text-sm text-gray-600">
             Don't have an account? {" "}
-            <Link to="/educator/create" className="text-blue-600 hover:underline">
+            <Link to="/educator/signup" className="text-blue-600 hover:underline">
               Create one
             </Link>
           </div>

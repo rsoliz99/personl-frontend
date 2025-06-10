@@ -1,3 +1,4 @@
+// DistrictLoginPage.jsx – Now supports login with localStorage credentials
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -21,12 +22,13 @@ export default function DistrictLoginPage() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      if (email === "admin@district.com" && password === "password123") {
-        localStorage.setItem('districtUser', JSON.stringify({
-          name: 'John Doe',
-          email: email,
-          district: 'Seminole ISD'
-        }));
+      const storedUser = JSON.parse(localStorage.getItem("districtUser"));
+
+      if (
+        storedUser &&
+        storedUser.email === email &&
+        storedUser.password === password
+      ) {
         navigate("/district/dashboard");
       } else {
         setError("Invalid credentials. Please try again.");
