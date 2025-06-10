@@ -1,7 +1,10 @@
-// DistrictSignupPage.jsx – Now includes confirm password field
+// DistrictSignupPage.jsx – Includes confirm password + sandbox banner toggle
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import SandboxBanner from "../components/SandboxBanner";
+
+const isSandbox = window.location.hostname !== "getpersonl.com";
 
 export default function DistrictSignupPage() {
   const navigate = useNavigate();
@@ -57,6 +60,7 @@ export default function DistrictSignupPage() {
 
   return (
     <main className="min-h-screen bg-[#f8fafc] text-[#003594] p-4">
+      {isSandbox && <SandboxBanner />}
       <header className="px-6 py-4 flex justify-between items-center">
         <Link to="/">
           <img src="/personl-logo.png" alt="PersonL Logo" className="h-10" />
