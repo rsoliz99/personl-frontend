@@ -1,8 +1,7 @@
-// DistrictSignupPage.jsx – with SandboxBanner
+// DistrictSignupPage.jsx – Now includes confirm password field
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import SandboxBanner from "../components/SandboxBanner";
 
 export default function DistrictSignupPage() {
   const navigate = useNavigate();
@@ -54,26 +53,14 @@ export default function DistrictSignupPage() {
     navigate("/district/login");
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("districtUser");
-    navigate("/");
-  };
-
   const filteredDistricts = allDistricts.filter((d) => d.state === state);
 
   return (
     <main className="min-h-screen bg-[#f8fafc] text-[#003594] p-4">
-      <SandboxBanner />
       <header className="px-6 py-4 flex justify-between items-center">
         <Link to="/">
           <img src="/personl-logo.png" alt="PersonL Logo" className="h-10" />
         </Link>
-        <button
-          onClick={handleLogout}
-          className="text-sm text-[#003594] font-semibold border border-[#003594] px-3 py-1 rounded hover:bg-[#003594] hover:text-white"
-        >
-          Logout
-        </button>
       </header>
       <div className="flex justify-center">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md text-center">
