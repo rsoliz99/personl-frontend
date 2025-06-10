@@ -1,7 +1,12 @@
-// EducatorLoginPage.jsx – Now supports login with localStorage credentials
+// EducatorLoginPage.jsx – Now supports login with localStorage credentials and SandboxBanner
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import SandboxBanner from "../components/SandboxBanner";
+
+const isSandbox =
+  window.location.pathname.startsWith("/demo") ||
+  !window.location.hostname.includes("getpersonl.com");
 
 export default function EducatorLoginPage() {
   const navigate = useNavigate();
@@ -38,6 +43,7 @@ export default function EducatorLoginPage() {
 
   return (
     <main className="min-h-screen bg-[#f8fafc] text-[#003594] p-4">
+      {isSandbox && <SandboxBanner />}
       <header className="px-6 py-4">
         <Link to="/">
           <img src="/personl-logo.png" alt="PersonL Logo" className="h-10" />
