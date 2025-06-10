@@ -1,8 +1,10 @@
-// EducatorSignupPage.jsx – Conditionally shows SandboxBanner only in sandbox environment
+// EducatorSignupPage.jsx – hide 'Fill With Demo Credentials' unless in sandbox mode
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SandboxBanner from "../components/SandboxBanner";
+
+const isSandbox = !window.location.hostname.includes("getpersonl.com");
 
 export default function EducatorSignupPage() {
   const navigate = useNavigate();
@@ -15,8 +17,6 @@ export default function EducatorSignupPage() {
   const [allDistricts, setAllDistricts] = useState([]);
   const [uniqueStates, setUniqueStates] = useState([]);
   const [error, setError] = useState("");
-
-  const isSandbox = window.location.hostname.includes("sandbox");
 
   useEffect(() => {
     fetch("/districts.json")
@@ -81,20 +81,22 @@ export default function EducatorSignupPage() {
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md text-center">
           <h1 className="text-3xl font-bold mb-6">Educator Sign Up</h1>
           <form className="space-y-4" onSubmit={handleSubmit}>
-            <button
-              type="button"
-              onClick={() => {
-                setName("Demo Teacher");
-                setEmail("demo@demo.com");
-                setPassword("password123");
-                setConfirmPassword("password123");
-                setState("TX");
-                setDistrict("Seminole ISD");
-              }}
-              className="w-full bg-gray-200 text-sm text-[#003594] py-1 rounded hover:bg-gray-300"
-            >
-              Fill With Demo Credentials
-            </button>
+            {isSandbox && (
+              <button
+                type="button"
+                onClick={() => {
+                  setName("Demo Teacher");
+                  setEmail("demo@demo.com");
+                  setPassword("password123");
+                  setConfirmPassword("password123");
+                  setState("TX");
+                  setDistrict("Seminole ISD");
+                }}
+                className="w-full bg-gray-200 text-sm text-[#003594] py-1 rounded hover:bg-gray-300"
+              >
+                Fill With Demo Credentials
+              </button>
+            )}
 
             <input
               type="text"
