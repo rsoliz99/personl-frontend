@@ -79,20 +79,21 @@ export default function EducatorSignupPage() {
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md text-center">
           <h1 className="text-3xl font-bold mb-6">Educator Sign Up</h1>
           <form className="space-y-4" onSubmit={handleSubmit}>
-            <button
-              type="button"
-              onClick={() => {
-                setName("Demo Teacher");
-                setEmail("demo@demo.com");
-                setPassword("password123");
-                setConfirmPassword("password123");
-                setState("TX");
-                setDistrict("Seminole ISD");
-              }}
-              className="w-full bg-gray-200 text-sm text-[#003594] py-1 rounded hover:bg-gray-300"
-            >
-              Fill With Demo Credentials
-            </button>
+           <button
+  type="button"
+  onClick={() => {
+    setName("Demo Teacher");
+    setEmail("demo@demo.com");
+    setPassword("password123");
+    setConfirmPassword("password123");
+    setState("TX");
+    setDistrict("Seminole ISD");
+  }}
+  className="w-full bg-gray-200 text-sm text-[#003594] py-1 rounded hover:bg-gray-300"
+>
+  Fill With Demo Credentials
+</button>
+
 
             <input
               type="text"
