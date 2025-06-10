@@ -1,4 +1,4 @@
-// EducatorSignupPage.jsx – Sandbox Demo Mode with Pre-Fill and Single Password Fields
+// EducatorSignupPage.jsx – Conditionally shows SandboxBanner only in sandbox environment
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -15,6 +15,8 @@ export default function EducatorSignupPage() {
   const [allDistricts, setAllDistricts] = useState([]);
   const [uniqueStates, setUniqueStates] = useState([]);
   const [error, setError] = useState("");
+
+  const isSandbox = window.location.hostname.includes("sandbox");
 
   useEffect(() => {
     fetch("/districts.json")
@@ -63,7 +65,7 @@ export default function EducatorSignupPage() {
 
   return (
     <main className="min-h-screen bg-[#f8fafc] text-[#003594] p-4">
-      <SandboxBanner />
+      {isSandbox && <SandboxBanner />}
       <header className="px-6 py-4 flex justify-between items-center">
         <Link to="/">
           <img src="/personl-logo.png" alt="PersonL Logo" className="h-10" />
