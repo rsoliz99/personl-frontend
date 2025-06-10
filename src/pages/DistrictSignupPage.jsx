@@ -1,12 +1,15 @@
+// DistrictSignupPage.jsx – with SandboxBanner
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import SandboxBanner from "../components/SandboxBanner";
 
 export default function DistrictSignupPage() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [state, setState] = useState("");
   const [district, setDistrict] = useState("");
   const [allDistricts, setAllDistricts] = useState([]);
@@ -36,6 +39,16 @@ export default function DistrictSignupPage() {
       return;
     }
 
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     const newDistrictUser = { name, email, password, district, state };
     localStorage.setItem("districtUser", JSON.stringify(newDistrictUser));
     navigate("/district/login");
@@ -50,6 +63,7 @@ export default function DistrictSignupPage() {
 
   return (
     <main className="min-h-screen bg-[#f8fafc] text-[#003594] p-4">
+      <SandboxBanner />
       <header className="px-6 py-4 flex justify-between items-center">
         <Link to="/">
           <img src="/personl-logo.png" alt="PersonL Logo" className="h-10" />
@@ -81,10 +95,17 @@ export default function DistrictSignupPage() {
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Create Password"
               className="w-full border border-gray-300 rounded px-4 py-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              className="w-full border border-gray-300 rounded px-4 py-2"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <select
               value={state}
