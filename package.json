@@ -2,7 +2,7 @@
   "name": "personl",
   "version": "1.0.0",
   "private": true,
-  "homepage": ".",
+"homepage": "/demo",
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
