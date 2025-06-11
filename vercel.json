@@ -1,24 +1,11 @@
 {
   "rewrites": [
     {
-      "source": "/demo",
-      "destination": "/"
-    },
-    {
       "source": "/demo/:path*",
-      "destination": "/:path*"
+      "destination": "/index.html"
     }
   ],
   "headers": [
-    {
-      "source": "/demo",
-      "headers": [
-        {
-          "key": "X-Sandbox-Mode",
-          "value": "true"
-        }
-      ]
-    },
     {
       "source": "/demo/:path*",
       "headers": [
